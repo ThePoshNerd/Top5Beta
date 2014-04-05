@@ -5,7 +5,7 @@ local scene = storyboard.newScene()
 
 function scene:createScene( event )
 local group = self.view
-local mainGroup = display.newGroup()
+mainGroup = display.newGroup()
 sideBarGroup = display.newGroup()
 
 
@@ -13,20 +13,25 @@ local mainMenuBackground = display.newRect( _W*0.5, _H*0.5, _W, _H )
 mainMenuBackground:setFillColor( 229/255,229/255,229/255 )
 mainGroup:insert(mainMenuBackground)
 
-local topBar = display.newRect( _W*0.5, 0, _W, 96 )
-topBar.y = topBar.height/2
-topBar:setFillColor( 244/255,45/255,53/255 )
+mainMenuShade = display.newRect( _W*0.5, _H*0.5, _W, _H )
+mainMenuShade:setFillColor( 0/255,0/255,0/255 )
+mainMenuShade.alpha = 0
+mainGroup:insert(mainMenuShade)
+
+local topBar = display.newImage( "mainMenuAssets/TopBar.png" )
+topBar.x = _W*0.5
+topBar.y = 48 
 mainGroup:insert(topBar)
 
-sideBarBackground = display.newRect( _W*0.5, _H*0.5, 576, _H )
-sideBarBackground:setFillColor( 229/255,229/255,129/255 )
+sideBarBackground = display.newRect( _W*0.5, _H*0.5+48, 576, _H-96 )
+sideBarBackground:setFillColor( 229/255,229/255,229/255 )
 sideBarBackground.x = _W*0.5 - sideBarBackground.width - 72
 sideBarGroup:insert(sideBarBackground)
 
 sideBarTouch = display.newRect( _W*0.5, _H*0.5+48, 300, _H-96 )
-sideBarTouch:setFillColor( 129/255,229/255,129/255 )
+sideBarTouch:setFillColor( 255/255,255/255,255/255 )
 sideBarTouch.x = sideBarBackground.x + 608/2
-sideBarTouch.alpha = 0.1
+sideBarTouch.alpha = 0.01
 sideBarGroup:insert(sideBarTouch)
 
 
@@ -53,9 +58,10 @@ function checkSwipeDirection()
         if xDistance > yDistance then
                 if beginX > endX then
                     if sideBarState == "open" then
-					sideBarState = "closed"
+					sideBarState = "closed" 
 					print(sideBarState)
 					transition.to(sideBarGroup, { time=100,x = 0 , transition=easing.inOutQuad })
+					transition.to(mainMenuShade, { time=100, alpha = 0 })
                     print("swipe left")
 				end
                 else 
@@ -63,6 +69,7 @@ function checkSwipeDirection()
 					sideBarState = "open"
 					print(sideBarState)
 					transition.to(sideBarGroup, { time=100,x = 576 , transition=easing.inOutQuad })
+					transition.to(mainMenuShade, { time=200, alpha = 0.5 })
                     print("swipe right")
 					end
                 end
