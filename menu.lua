@@ -1,6 +1,9 @@
 local storyboard = require "storyboard"
 local scene = storyboard.newScene()
 storyboard.removeScene( "newRating" )
+storyboard.removeScene( "coupon" )
+
+
 local widget = require( "widget" )
 --local analytics = require "analytics"
 
@@ -170,12 +173,13 @@ splashScreen.y = _H*0.5
 splashScreen.x = _W*0.5
 
 
-splashed = "false"
 
 local function splashFade(event)
 if splashed == "false" then
 splashed = "true"
 transition.to(splashScreen, { delay = 4000, time=500, alpha = 0 })
+else
+splashScreen.alpha = 0
 end
 end
 splashFade()
@@ -411,6 +415,10 @@ local function goToRate (event)
 	storyboard.gotoScene( "newRating" ) 
 end
 
+local function goToCoupon (event)
+	storyboard.gotoScene( "coupon" ) 
+end
+
 local function cleanUp (event)
 	if event.phase == "ended" then
 		mainGroup:removeSelf()
@@ -425,6 +433,23 @@ local function cleanUp (event)
 	end
 end
 sideBtn1:addEventListener("touch",cleanUp)
+
+local function cleanUp (event)
+	if event.phase == "ended" then
+		mainGroup:removeSelf()
+		sideBarGroup:removeSelf()
+		sideScrollGroup:removeSelf()
+		foodPlaces:removeSelf()
+		shopPlaces:removeSelf()
+		foodBtnCover:removeSelf()
+		shopBtnCover:removeSelf()
+		
+		mainMenuSideButton:removeEventListener("touch", mainSideButtonFunc)
+	topBar:removeSelf()
+		goToCoupon() 
+	end
+end
+sideBtn3:addEventListener("touch",cleanUp)
 
 local function sideButtonCover (event)
 if event.phase == "began" then
