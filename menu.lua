@@ -9,8 +9,8 @@ local group = self.view
 mainGroup = display.newGroup()
 sideBarGroup = display.newGroup()
 sideScrollGroup = display.newGroup()
-sideBarGroup.x = -576
-sideScrollGroup.x = -576
+sideBarGroup.x = -360
+sideScrollGroup.x = -360
 
 
 -- MainMenu Assets
@@ -26,34 +26,40 @@ topBar.x = _W*0.5
 topBar.y = 38 
 mainGroup:insert(topBar)
 
-local catagoryBtn1 = display.newImage( "mainMenuAssets/Button.png" )
+catagoryBtn1 = display.newImage( "mainMenuAssets/Button.png" )
 catagoryBtn1.x = _W*0.5
 catagoryBtn1.y = 193
 mainGroup:insert(catagoryBtn1)
 
-local catagoryBtn2 = display.newImage( "mainMenuAssets/Button.png" )
+catagoryBtn2 = display.newImage( "mainMenuAssets/Button2.png" )
 catagoryBtn2.x = _W*0.5
 catagoryBtn2.y = catagoryBtn1.y + 218
 --catagoryBtn2.alpha = 0.5
 mainGroup:insert(catagoryBtn2)
 
-local catagoryBtn3 = display.newImage( "mainMenuAssets/Button.png" )
+catagoryBtn3 = display.newImage( "mainMenuAssets/Button3.png" )
 catagoryBtn3.x = _W*0.5
 catagoryBtn3.y = catagoryBtn2.y + 218
 mainGroup:insert(catagoryBtn3)
 
-local catagoryBtn4 = display.newImage( "mainMenuAssets/Button.png" )
+catagoryBtn4 = display.newImage( "mainMenuAssets/Button4.png" )
 catagoryBtn4.x = _W*0.5
 catagoryBtn4.y = catagoryBtn3.y + 218
 --catagoryBtn4.alpha = 0.5
 mainGroup:insert(catagoryBtn4)
 
-local catagoryBtn5 = display.newImage( "mainMenuAssets/Button.png" )
+catagoryBtn5 = display.newImage( "mainMenuAssets/Button5.png" )
 catagoryBtn5.x = _W*0.5
 catagoryBtn5.y = catagoryBtn4.y + 218
 mainGroup:insert(catagoryBtn5)
 
-mainMenuShade = display.newRect( _W*0.5, _H*0.5+48, _W, _H-96 )
+catagoryBtnCover = display.newImage( "mainMenuAssets/ButtonCover.png" )
+catagoryBtnCover.x = _W*0.5
+catagoryBtnCover.y = -1200
+catagoryBtnCover.alpha = 1
+mainGroup:insert(catagoryBtnCover)
+
+mainMenuShade = display.newRect( _W*0.5, _H*0.5+96, _W, _H+24 )
 mainMenuShade:setFillColor( 0/255,0/255,0/255 )
 mainMenuShade.alpha = 0
 mainGroup:insert(mainMenuShade)
@@ -67,38 +73,38 @@ mainGroup:insert(mainMenuSideButton)
 
 -- SideBar Assets
 
-sideBarBackground = display.newRect( _W*0.5, _H*0.5+48, 576, _H-96 )
+sideBarBackground = display.newRect( _W*0.5, _H*0.5+96, _W*0.5, _H+24 )
 sideBarBackground:setFillColor( 229/255,229/255,229/255 )
-sideBarBackground.x = _W*0.5 - 72
+sideBarBackground.x = _W*0.5 - 180
 --sideBarBackground.alpha = 0.01
 sideBarGroup:insert(sideBarBackground)
 
-sideBarSwipe = display.newRect( _W*0.5, _H*0.5+48, 300, _H-96 )
+sideBarSwipe = display.newRect( _W*0.5, _H*0.5+48, 220, _H-96 )
 sideBarSwipe:setFillColor( 255/255,255/255,255/255 )
-sideBarSwipe.x = sideBarBackground.x + 608/2
+sideBarSwipe.x = sideBarBackground.x + 250
 sideBarSwipe.alpha = 0.01
 sideBarGroup:insert(sideBarSwipe)
 
-sideBarText1 = display.newText( "Trending", 0, 170, native.systemFontBold, 40 )
-sideBarText1:setFillColor( 80/255, 80/255, 80/255 )
-sideBarText1.x = sideBarBackground.x - 180
-sideScrollGroup:insert(sideBarText1)
+sideBtn1 = display.newImage( "mainMenuAssets/SideButton.png" )
+sideBtn1.x = _W*0.5*0.5
+sideBtn1.y = 193
+sideScrollGroup:insert(sideBtn1)
 
-sideBarText2 = display.newText( "Rate This Place", 0, sideBarText1.y + 140, native.systemFont, 40 )
-sideBarText2:setFillColor( 80/255, 80/255, 80/255 )
-sideBarText2.x = sideBarBackground.x - 118
-sideScrollGroup:insert(sideBarText2)
+sideBtn2 = display.newImage( "mainMenuAssets/SideButton2.png" )
+sideBtn2.x = _W*0.5*0.5
+sideBtn2.y = sideBtn1.y +218
+sideScrollGroup:insert(sideBtn2)
 
-sideBarText3 = display.newText( "My Top Five", 0, sideBarText2.y + 140, native.systemFont, 40 )
-sideBarText3:setFillColor( 80/255, 80/255, 80/255 )
-sideBarText3.x = sideBarBackground.x - 145
-sideScrollGroup:insert(sideBarText3)
+sideBtn3 = display.newImage( "mainMenuAssets/SideButton3.png" )
+sideBtn3.x = _W*0.5*0.5
+sideBtn3.y = sideBtn2.y +218
+sideScrollGroup:insert(sideBtn3)
 
-sideBarText4 = display.newText( "Rate Me", 0, sideBarText3.y + 140, native.systemFont, 40 )
-sideBarText4:setFillColor( 80/255, 80/255, 80/255 )
-sideBarText4.x = sideBarBackground.x - 185
-sideScrollGroup:insert(sideBarText4)
-
+sideBtnCover = display.newImage( "mainMenuAssets/SideButtonCover.png" )
+sideBtnCover.x = _W*0.5*0.5
+sideBtnCover.y = 193
+sideBtnCover.alpha = 0
+sideScrollGroup:insert(sideBtnCover)
 
 
 end
@@ -121,8 +127,8 @@ local function mainSideButtonFunc(event)
 	elseif event.phase == "ended" and sideBarState == "open" then
 		sideBarState = "closed" 
 		print(sideBarState)
-		transition.to(sideBarGroup, { time=200,x = -576 , transition=easing.outQuad })
-		transition.to(sideScrollGroup, { time=200,x = -576 , transition=easing.outQuad })
+		transition.to(sideBarGroup, { time=200,x = -360 , transition=easing.outQuad }) --576
+		transition.to(sideScrollGroup, { time=200,x = -360 , transition=easing.outQuad })
 		transition.to(mainMenuShade, { delay = 50, time=100, alpha = 0 })
 		mainMenuSideButton.alpha = 0.01
 	end
@@ -148,8 +154,8 @@ function checkSwipeDirection()
                     if sideBarState == "open" then
 					sideBarState = "closed" 
 					print(sideBarState)
-					transition.to(sideBarGroup, { time=150,x = -576 , transition=easing.outQuad })
-					transition.to(sideScrollGroup, { time=150,x = -576 , transition=easing.outQuad })
+					transition.to(sideBarGroup, { time=150,x = -360 , transition=easing.outQuad })
+					transition.to(sideScrollGroup, { time=150,x = -360 , transition=easing.outQuad })
 					transition.to(mainMenuShade, { delay = 50, time=100, alpha = 0 })
                     print("swipe left")
 				end
@@ -189,9 +195,7 @@ function swipe(event)
                 checkSwipeDirection();
         end
 end
- 
 sideBarSwipe:addEventListener("touch", swipe) -- Runtime
-
 
 local function sideSwipe( event )
 	local t = event.target
@@ -232,8 +236,38 @@ local function sideSwipe( event )
 end
 sideBarSwipe:addEventListener("touch", sideSwipe)
 
+local function mainMenuButtonCover (event)
+if event.phase == "began" and sideBarState == "closed" then
+	local t = event.target
+	catagoryBtnCover.alpha = 0.2
+	catagoryBtnCover.y = t.y
+	catagoryBtnCover.x = t.x
+	elseif event.phase == "moved" then
+	catagoryBtnCover.alpha = 0
+	elseif event.phase == "ended" then
+	catagoryBtnCover.alpha = 0
+	end
+end
+catagoryBtn1:addEventListener("touch", mainMenuButtonCover)
+catagoryBtn2:addEventListener("touch", mainMenuButtonCover)
+catagoryBtn3:addEventListener("touch", mainMenuButtonCover)
+catagoryBtn4:addEventListener("touch", mainMenuButtonCover)
+catagoryBtn5:addEventListener("touch", mainMenuButtonCover)
 
 
+local function sideButtonCover (event)
+if event.phase == "began" then
+	local t = event.target
+	sideBtnCover.alpha = 0.2
+	sideBtnCover.y = t.y
+	sideBtnCover.x = t.x
+	elseif event.phase == "ended" then
+	sideBtnCover.alpha = 0
+	end
+end
+sideBtn1:addEventListener("touch", sideButtonCover)
+sideBtn2:addEventListener("touch", sideButtonCover)
+sideBtn3:addEventListener("touch", sideButtonCover)
 
 end
 
