@@ -87,7 +87,7 @@ mainGroup:insert(mainMenuShade)
 
 mainMenuSideButton = display.newRect( 0, 38, 200, 96 )
 mainMenuSideButton:setFillColor( 255/255,255/255,255/255 )
-mainMenuSideButton.alpha = 0.01
+mainMenuSideButton.alpha = 0
 mainGroup:insert(mainMenuSideButton)
 
 
@@ -170,12 +170,20 @@ splashScreen.y = _H*0.5
 splashScreen.x = _W*0.5
 
 
-
+splashed = "false"
 
 local function splashFade(event)
-transition.to(splashScreen, { delay = 2000, time=500, alpha = 0 })
+if splashed == "false" then
+splashed = "true"
+transition.to(splashScreen, { delay = 4000, time=500, alpha = 0 })
+end
 end
 splashFade()
+
+backButton = display.newRect( 0, 38, 200, 96 )
+backButton:setFillColor( 255/255,255/255,255/255 )
+backButton.alpha = 0
+mainGroup:insert(backButton)
 
 end
 
@@ -341,8 +349,9 @@ catagoryBtn2:addEventListener("touch", goShopPlaces)
 
 local function openMap (event)
 local myMap = native.newMapView( _W*0.5, _H*0.5, 520, 520 )
-myMap:setCenter( 36.971436, -122.024425 )
+--myMap:setCenter( 36.971436, -122.024425 )
 
+      --  myMap:addMarker( 36.971436, -122.024425, { title="The Surfrider Cafe", subtitle="Mmm, burgers" } )
 end
 
 
@@ -415,7 +424,7 @@ local function cleanUp (event)
 		goToRate() 
 	end
 end
-sideBtn2:addEventListener("touch",cleanUp)
+sideBtn1:addEventListener("touch",cleanUp)
 
 local function sideButtonCover (event)
 if event.phase == "began" then

@@ -32,6 +32,12 @@ ratingImage.x = _W*0.5 + 720
 ratingImage.y = _H*0.5 - 100
 ratingGroup:insert(ratingImage)
 
+shareBox = display.newImage( "ratingMenuAssets/Share.png" )
+shareBox.x = _W*0.5 + 720
+shareBox.y = _H*0.5
+shareBox.alpha = 0
+ratingGroup:insert(shareBox)
+
 local mainMenuBox = display.newRect( _W*0.5, _H*0.5, 510, 654 )
 mainMenuBox:setFillColor( 255/255,255/255,255/255 )
 ratingGroup:insert(mainMenuBox)
@@ -55,6 +61,7 @@ ratingGroup:insert(submitBtn)
 allDoneButton = display.newImage( "ratingMenuAssets/AllDoneButton.png" )
 allDoneButton.x = _W*0.5/0.5-220+720
 allDoneButton.y = 1045
+allDoneButton.alpha = 0
 ratingGroup:insert(allDoneButton)
 
 allDoneButtonCover = display.newImage( "ratingMenuAssets/AllDoneButtonCover.png" )
@@ -79,6 +86,9 @@ mainMenuSideButton = display.newRect( 0, 38, 200, 96 )
 mainMenuSideButton:setFillColor( 255/255,255/255,255/255 )
 mainMenuSideButton.alpha = 0.01
 mainGroup:insert(mainMenuSideButton)
+
+
+
 
 -- Tables
 
@@ -332,6 +342,8 @@ placeBtn:addEventListener("touch", choosePlace)
 local function submitRating (event)
 if event.phase == "ended" then
 	transition.to(ratingGroup, { time=300, x = -720, transition=easing.inOutQuad })
+	transition.to(shareBox, {delay = 800, time=300, alpha = 1 , transition=easing.inOutQuad })
+	transition.to(allDoneButton, {delay = 800, time=300, alpha = 1 , transition=easing.inOutQuad })
 	end
 end
 submitBtn:addEventListener("touch", submitRating)
