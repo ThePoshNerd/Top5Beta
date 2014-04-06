@@ -1,6 +1,14 @@
 local storyboard = require "storyboard"
 local scene = storyboard.newScene()
 storyboard.removeScene( "newRating" )
+local widget = require( "widget" )
+--local analytics = require "analytics"
+
+-- initialize with proper API key corresponding to your application
+--analytics.init( "V3RQ9XH3RNBX34MC4BR3" )
+
+-- log events
+--analytics.logEvent( "Opened Main Menu" )
 --------------------
 
 function scene:createScene( event )
@@ -14,6 +22,8 @@ sideScrollGroup.x = -360
 
 
 -- MainMenu Assets
+
+
 
 
 local mainMenuBackground = display.newImage( "mainMenuAssets/MainMenuBackground.jpg" )
@@ -88,6 +98,12 @@ foodPlaces.y = _H*0.5+50
 foodPlaces.x = _W*0.5+720
 foodPlaces.alpha = 1
 
+surfRiderPage = display.newImage( "mainMenuAssets/SurfRider.png" )
+surfRiderPage.y = _H*0.5+50
+surfRiderPage.x = _W*0.5+720
+surfRiderPage.alpha = 1
+
+
 shopPlaces = display.newImage( "mainMenuAssets/SportsShopPlaces.png" )
 shopPlaces.y = _H*0.5+50
 shopPlaces.x = _W*0.5+720
@@ -102,7 +118,7 @@ foodBtnCover.alpha = 0.01
 shopBtnCover = display.newImage( "mainMenuAssets/ButtonCover.png" )
 shopBtnCover.x = _W*0.5+720
 shopBtnCover.y = 193
-shopBtnCover.alpha = 0.5
+shopBtnCover.alpha = 0.01
 --mainGroup:insert(foodBtnCover)
 
 
@@ -137,6 +153,11 @@ sideBtn3.x = _W*0.5*0.5
 sideBtn3.y = sideBtn2.y +218
 sideScrollGroup:insert(sideBtn3)
 
+sideBtn4 = display.newImage( "mainMenuAssets/SideButton4.png" )
+sideBtn4.x = _W*0.5*0.5
+sideBtn4.y = sideBtn3.y +218
+sideScrollGroup:insert(sideBtn4)
+
 sideBtnCover = display.newImage( "mainMenuAssets/SideButtonCover.png" )
 sideBtnCover.x = _W*0.5*0.5
 sideBtnCover.y = 193
@@ -144,7 +165,17 @@ sideBtnCover.alpha = 0
 sideScrollGroup:insert(sideBtnCover)
 
 
+local splashScreen = display.newImage( "mainMenuAssets/SplashScreen.png" )
+splashScreen.y = _H*0.5
+splashScreen.x = _W*0.5
 
+
+
+
+local function splashFade(event)
+transition.to(splashScreen, { delay = 2000, time=500, alpha = 0 })
+end
+splashFade()
 
 end
 
@@ -308,13 +339,20 @@ catagoryBtn2:addEventListener("touch", goShopPlaces)
 
 
 
+local function openMap (event)
+local myMap = native.newMapView( _W*0.5, _H*0.5, 520, 520 )
+myMap:setCenter( 36.971436, -122.024425 )
+
+end
 
 
 local function goFoodDetails (event)
 if event.phase == "ended"then
 print"test"
-	transition.to(foodPlaces, { time=300, x = -720, transition=easing.inOutQuad })
-	transition.to(foodBtnCover, { time=300, x = -720, transition=easing.inOutQuad })
+	timer.performWithDelay(200, openMap)
+	transition.to(surfRiderPage, { time=300, x = _W*0.5, transition=easing.inOutQuad })
+	transition.to(foodPlaces, { time=300, x = -360, transition=easing.inOutQuad })
+	transition.to(foodBtnCover, { time=300, x = -360, transition=easing.inOutQuad })
 	--transition.to(mainGroup, { time=300, x = -_W*0.5, transition=easing.inOutQuad })
 	end
 end
@@ -392,6 +430,7 @@ end
 sideBtn1:addEventListener("touch", sideButtonCover)
 sideBtn2:addEventListener("touch", sideButtonCover)
 sideBtn3:addEventListener("touch", sideButtonCover)
+sideBtn4:addEventListener("touch", sideButtonCover)
 
 
 
