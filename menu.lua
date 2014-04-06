@@ -51,20 +51,25 @@ sideBarSwipe.x = sideBarBackground.x + 608/2
 sideBarSwipe.alpha = 0.01
 sideBarGroup:insert(sideBarSwipe)
 
-sideBarText1 = display.newText( "Rate This Place", 0, 170, native.systemFontBold, 40 )
+sideBarText1 = display.newText( "Trending", 0, 170, native.systemFontBold, 40 )
 sideBarText1:setFillColor( 80/255, 80/255, 80/255 )
-sideBarText1.x = sideBarBackground.x - 118
+sideBarText1.x = sideBarBackground.x - 180
 sideScrollGroup:insert(sideBarText1)
 
-sideBarText2 = display.newText( "My Top Five", 0, sideBarText1.y + 140, native.systemFont, 40 )
+sideBarText2 = display.newText( "Rate This Place", 0, sideBarText1.y + 140, native.systemFont, 40 )
 sideBarText2:setFillColor( 80/255, 80/255, 80/255 )
-sideBarText2.x = sideBarBackground.x - 145
+sideBarText2.x = sideBarBackground.x - 118
 sideScrollGroup:insert(sideBarText2)
 
-sideBarText3 = display.newText( "Rate Me", 0, sideBarText2.y + 140, native.systemFont, 40 )
+sideBarText3 = display.newText( "My Top Five", 0, sideBarText2.y + 140, native.systemFont, 40 )
 sideBarText3:setFillColor( 80/255, 80/255, 80/255 )
-sideBarText3.x = sideBarBackground.x - 185
+sideBarText3.x = sideBarBackground.x - 145
 sideScrollGroup:insert(sideBarText3)
+
+sideBarText4 = display.newText( "Rate Me", 0, sideBarText3.y + 140, native.systemFont, 40 )
+sideBarText4:setFillColor( 80/255, 80/255, 80/255 )
+sideBarText4.x = sideBarBackground.x - 185
+sideScrollGroup:insert(sideBarText4)
 
 
 
@@ -81,15 +86,15 @@ local function mainSideButtonFunc(event)
 	elseif event.phase == "ended" and sideBarState == "closed" then
 		sideBarState = "open"
 		print(sideBarState)
-		transition.to(sideBarGroup, { time=150,x = 0 , transition=easing.inOutQuad })
-		transition.to(sideScrollGroup, { time=150,x = 0 , transition=easing.inOutQuad })
+		transition.to(sideBarGroup, { time=150,x = 0 , transition=easing.outQuad })
+		transition.to(sideScrollGroup, { time=150,x = 0 , transition=easing.outQuad })
 		transition.to(mainMenuShade, { time=200, alpha = 0.5 })
 		mainMenuSideButton.alpha = 0.01
 	elseif event.phase == "ended" and sideBarState == "open" then
 		sideBarState = "closed" 
 		print(sideBarState)
-		transition.to(sideBarGroup, { time=150,x = -576 , transition=easing.inOutQuad })
-		transition.to(sideScrollGroup, { time=150,x = -576 , transition=easing.inOutQuad })
+		transition.to(sideBarGroup, { time=150,x = -576 , transition=easing.outQuad })
+		transition.to(sideScrollGroup, { time=150,x = -576 , transition=easing.outQuad })
 		transition.to(mainMenuShade, { delay = 50, time=100, alpha = 0 })
 		mainMenuSideButton.alpha = 0.01
 	end
@@ -115,8 +120,8 @@ function checkSwipeDirection()
                     if sideBarState == "open" then
 					sideBarState = "closed" 
 					print(sideBarState)
-					transition.to(sideBarGroup, { time=150,x = -576 , transition=easing.inOutQuad })
-					transition.to(sideScrollGroup, { time=150,x = -576 , transition=easing.inOutQuad })
+					transition.to(sideBarGroup, { time=150,x = -576 , transition=easing.outQuad })
+					transition.to(sideScrollGroup, { time=150,x = -576 , transition=easing.outQuad })
 					transition.to(mainMenuShade, { delay = 50, time=100, alpha = 0 })
                     print("swipe left")
 				end
@@ -124,8 +129,8 @@ function checkSwipeDirection()
 					if sideBarState == "closed" then
 					sideBarState = "open"
 					print(sideBarState)
-					transition.to(sideBarGroup, { time=150,x = 0 , transition=easing.inOutQuad })
-					transition.to(sideScrollGroup, { time=150,x = 0 , transition=easing.inOutQuad })
+					transition.to(sideBarGroup, { time=150,x = 0 , transition=easing.outQuad })
+					transition.to(sideScrollGroup, { time=150,x = 0 , transition=easing.outQuad })
 					transition.to(mainMenuShade, { time=200, alpha = 0.5 })
                     print("swipe right")
 					end
