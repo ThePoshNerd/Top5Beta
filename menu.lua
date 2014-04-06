@@ -102,7 +102,7 @@ foodBtnCover.alpha = 0.01
 shopBtnCover = display.newImage( "mainMenuAssets/ButtonCover.png" )
 shopBtnCover.x = _W*0.5+720
 shopBtnCover.y = 193
-shopBtnCover.alpha = 0.01
+shopBtnCover.alpha = 0.5
 --mainGroup:insert(foodBtnCover)
 
 
@@ -233,6 +233,8 @@ function swipe(event)
                 endX = event.x
                 endY = event.y
                 checkSwipeDirection();
+				transition.to(mainMenuShade, { time=100, alpha = 0.1 })
+				touchBlocker.alpha = 0.01
         end
 end
 sideBarSwipe:addEventListener("touch", swipe) -- Runtime
@@ -279,14 +281,15 @@ sideBarSwipe:addEventListener("touch", sideSwipe)
 
 
 
+local catagory = 0
 
 
 local function goFoodPlaces (event)
 if event.phase == "ended" then
-
+catagory = 1
 	transition.to(foodPlaces, { time=300, x = _W*0.5, transition=easing.inOutQuad })
 	transition.to(foodBtnCover, { time=300, x = _W*0.5, transition=easing.inOutQuad })
-	transition.to(mainGroup, { time=300, x = -_W*0.5, transition=easing.inOutQuad })
+	transition.to(mainGroup, { time=300, x = -720, transition=easing.inOutQuad })
 	end
 end
 
@@ -294,14 +297,39 @@ catagoryBtn1:addEventListener("touch", goFoodPlaces)
 
 local function goShopPlaces (event)
 if event.phase == "ended" then
-
+catagory = 2
 	transition.to(shopPlaces, { time=300, x = _W*0.5, transition=easing.inOutQuad })
 	transition.to(shopBtnCover, { time=300, x = _W*0.5, transition=easing.inOutQuad })
-	transition.to(mainGroup, { time=300, x = -_W*0.5, transition=easing.inOutQuad })
+	transition.to(mainGroup, { time=300, x = -720, transition=easing.inOutQuad })
 	end
 end
 
 catagoryBtn2:addEventListener("touch", goShopPlaces)
+
+
+
+
+
+local function goFoodDetails (event)
+if event.phase == "ended"then
+print"test"
+	transition.to(foodPlaces, { time=300, x = -720, transition=easing.inOutQuad })
+	transition.to(foodBtnCover, { time=300, x = -720, transition=easing.inOutQuad })
+	--transition.to(mainGroup, { time=300, x = -_W*0.5, transition=easing.inOutQuad })
+	end
+end
+
+foodBtnCover:addEventListener("touch", goFoodDetails)
+
+local function goShopDetails (event)
+if event.phase == "ended" then
+	transition.to(shopPlaces, { time=300, x = -720, transition=easing.inOutQuad })
+	transition.to(shopBtnCover, { time=300, x = -720, transition=easing.inOutQuad })
+	--transition.to(mainGroup, { time=300, x = -_W*0.5, transition=easing.inOutQuad })
+	end
+end
+
+shopBtnCover:addEventListener("touch", goShopDetails)
 
 
 
