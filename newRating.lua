@@ -1,6 +1,6 @@
 local storyboard = require "storyboard"
 local scene = storyboard.newScene()
-
+storyboard.removeScene( "menu" )
 --------------------
 
 function scene:createScene( event )
@@ -47,6 +47,18 @@ submitBtn = display.newImage( "ratingMenuAssets/RatePageButton3.png" )
 submitBtn.x = _W*0.5
 submitBtn.y = placeBtn.y + 218
 ratingGroup:insert(submitBtn)
+
+allDoneButton = display.newImage( "ratingMenuAssets/AllDoneButton.png" )
+allDoneButton.x = _W*0.5/0.5-220+720
+allDoneButton.y = 1045
+ratingGroup:insert(allDoneButton)
+
+allDoneButtonCover = display.newImage( "ratingMenuAssets/AllDoneButtonCover.png" )
+allDoneButtonCover.x = _W*0.5/0.5-220+720
+allDoneButtonCover.y = 1045
+allDoneButtonCover.alpha = 0
+ratingGroup:insert(allDoneButtonCover)
+
 
 menuBtnCover = display.newImage( "ratingMenuAssets/RatePageButtonCover.png" )
 menuBtnCover.x = _W*0.5*0.5
@@ -175,7 +187,7 @@ end
 
 local function submitRating (event)
 if event.phase == "ended" then
-	transition.to(ratingGroup, { time=400, x = -720, transition=easing.inOutQuad })
+	transition.to(ratingGroup, { time=300, x = -720, transition=easing.inOutQuad })
 	end
 end
 submitBtn:addEventListener("touch", submitRating)
@@ -193,6 +205,32 @@ end
 catagoryBtn:addEventListener("touch", menuButtonCover)
 placeBtn:addEventListener("touch", menuButtonCover)
 submitBtn:addEventListener("touch", menuButtonCover)
+
+
+local function goToMenu (event)
+	storyboard.gotoScene( "menu" ) 
+end
+
+local function cleanUp (event)
+	if event.phase == "ended" then
+		mainGroup:removeSelf()
+		ratingGroup:removeSelf()
+		goToMenu() 
+	end
+end
+allDoneButton:addEventListener("touch",cleanUp)
+
+local function allDoneButtonCoverFunc (event)
+if event.phase == "began" then
+	local t = event.target
+	allDoneButtonCover.alpha = 0.2
+	allDoneButtonCover.y = t.y
+	allDoneButtonCover.x = t.x
+	elseif event.phase == "ended" then
+	allDoneButtonCover.alpha = 0
+	end
+end
+allDoneButton:addEventListener("touch", allDoneButtonCoverFunc)
 
 end
 

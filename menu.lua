@@ -1,6 +1,6 @@
 local storyboard = require "storyboard"
 local scene = storyboard.newScene()
-
+storyboard.removeScene( "newRating" )
 --------------------
 
 function scene:createScene( event )
