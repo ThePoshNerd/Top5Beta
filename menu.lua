@@ -20,12 +20,9 @@ local mainMenuBackground = display.newImage( "mainMenuAssets/MainMenuBackground.
 mainMenuBackground.y = _H*0.5
 mainMenuBackground.x = _W*0.5
 mainGroup:insert(mainMenuBackground)
-
-local topBar = display.newImage( "mainMenuAssets/TopBar.png" )
+topBar = display.newImage( "mainMenuAssets/TopBar.png" )
 topBar.x = _W*0.5
 topBar.y = 38 
-
-
 
 
 
@@ -64,7 +61,12 @@ catagoryBtnCover.alpha = 1
 mainGroup:insert(catagoryBtnCover)
 
 
-
+touchBlocker = display.newRect(_W*0.5, _H*0.5, _W, _H)
+touchBlocker.alpha = 0
+--touchBlocker.isHitTestable = true -- Only needed if alpha is 0
+touchBlocker:addEventListener("touch", function() return true end)
+touchBlocker:addEventListener("tap", function() return true end)
+mainGroup:insert(touchBlocker)
 
 
 
@@ -77,7 +79,6 @@ mainMenuSideButton = display.newRect( 0, 38, 200, 96 )
 mainMenuSideButton:setFillColor( 255/255,255/255,255/255 )
 mainMenuSideButton.alpha = 0.01
 mainGroup:insert(mainMenuSideButton)
-
 
 
 
@@ -104,9 +105,6 @@ shopBtnCover.y = 193
 shopBtnCover.alpha = 0.01
 --mainGroup:insert(foodBtnCover)
 
-local topBar = display.newImage( "mainMenuAssets/TopBar.png" )
-topBar.x = _W*0.5
-topBar.y = 38 
 
 
 
@@ -227,6 +225,7 @@ function swipe(event)
                 beginY = event.y
 								if sideBarState == "closed" then
 				transition.to(mainMenuShade, { time=100, alpha = 0.1 })
+				touchBlocker.alpha = 0.01
         end
         end
         
@@ -342,6 +341,11 @@ local function cleanUp (event)
 		mainGroup:removeSelf()
 		sideBarGroup:removeSelf()
 		sideScrollGroup:removeSelf()
+		foodPlaces:removeSelf()
+		shopPlaces:removeSelf()
+		foodBtnCover:removeSelf()
+		shopBtnCover:removeSelf()
+	topBar:removeSelf()
 		goToRate() 
 	end
 end
