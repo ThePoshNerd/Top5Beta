@@ -64,7 +64,7 @@ mainMenuShade:setFillColor( 0/255,0/255,0/255 )
 mainMenuShade.alpha = 0
 mainGroup:insert(mainMenuShade)
 
-mainMenuSideButton = display.newRect( 0, 48, 200, 96 )
+mainMenuSideButton = display.newRect( 0, 38, 200, 96 )
 mainMenuSideButton:setFillColor( 255/255,255/255,255/255 )
 mainMenuSideButton.alpha = 0.01
 mainGroup:insert(mainMenuSideButton)
@@ -242,8 +242,6 @@ if event.phase == "began" and sideBarState == "closed" then
 	catagoryBtnCover.alpha = 0.2
 	catagoryBtnCover.y = t.y
 	catagoryBtnCover.x = t.x
-	elseif event.phase == "moved" then
-	catagoryBtnCover.alpha = 0
 	elseif event.phase == "ended" then
 	catagoryBtnCover.alpha = 0
 	end
@@ -254,6 +252,19 @@ catagoryBtn3:addEventListener("touch", mainMenuButtonCover)
 catagoryBtn4:addEventListener("touch", mainMenuButtonCover)
 catagoryBtn5:addEventListener("touch", mainMenuButtonCover)
 
+local function goToRate (event)
+	storyboard.gotoScene( "newRating" ) 
+end
+
+local function cleanUp (event)
+	if event.phase == "ended" then
+		mainGroup:removeSelf()
+		sideBarGroup:removeSelf()
+		sideScrollGroup:removeSelf()
+		goToRate() 
+	end
+end
+sideBtn2:addEventListener("touch",cleanUp)
 
 local function sideButtonCover (event)
 if event.phase == "began" then
