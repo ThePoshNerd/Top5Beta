@@ -115,7 +115,7 @@ local function onCatagoryRowRender( event )
 end
 
 local function onCatagoryRowTouch (event)
-	transition.to(catagoryGroup, { time=300, x = -720, transition=easing.inOutQuad })
+	transition.to(eGroup, { time=300, x = -720, transition=easing.inOutQuad })
 	transition.to(mainMenuShade, { time=300, alpha = 0, transition=easing.inOutQuad })
 end
 
@@ -151,7 +151,7 @@ placesData[3] = { name="Taco Bell" }
 placesData[4] = { name="Tam's Restaurant" }
 placesData[5] = { name="El Jardín Restaurant"}
 
-local function onPlaceRowRender( event )
+local function onPlacesRowRender( event )
 
    --Set up the localized variables to be passed via the event table
 

@@ -24,7 +24,11 @@ mainGroup:insert(mainMenuBackground)
 local topBar = display.newImage( "mainMenuAssets/TopBar.png" )
 topBar.x = _W*0.5
 topBar.y = 38 
-mainGroup:insert(topBar)
+
+
+
+
+
 
 catagoryBtn1 = display.newImage( "mainMenuAssets/Button.png" )
 catagoryBtn1.x = _W*0.5
@@ -59,6 +63,11 @@ catagoryBtnCover.y = -1200
 catagoryBtnCover.alpha = 1
 mainGroup:insert(catagoryBtnCover)
 
+
+
+
+
+
 mainMenuShade = display.newRect( _W*0.5, _H*0.5+96, _W, _H+24 )
 mainMenuShade:setFillColor( 0/255,0/255,0/255 )
 mainMenuShade.alpha = 0
@@ -68,6 +77,36 @@ mainMenuSideButton = display.newRect( 0, 38, 200, 96 )
 mainMenuSideButton:setFillColor( 255/255,255/255,255/255 )
 mainMenuSideButton.alpha = 0.01
 mainGroup:insert(mainMenuSideButton)
+
+
+
+
+
+foodPlaces = display.newImage( "mainMenuAssets/FoodPlaces.png" )
+foodPlaces.y = _H*0.5+50
+foodPlaces.x = _W*0.5+720
+foodPlaces.alpha = 1
+
+shopPlaces = display.newImage( "mainMenuAssets/SportsShopPlaces.png" )
+shopPlaces.y = _H*0.5+50
+shopPlaces.x = _W*0.5+720
+shopPlaces.alpha = 1
+--mainGroup:insert(foodPlaces)
+
+foodBtnCover = display.newImage( "mainMenuAssets/ButtonCover.png" )
+foodBtnCover.x = _W*0.5+720
+foodBtnCover.y = 193
+foodBtnCover.alpha = 0.01
+
+shopBtnCover = display.newImage( "mainMenuAssets/ButtonCover.png" )
+shopBtnCover.x = _W*0.5+720
+shopBtnCover.y = 193
+shopBtnCover.alpha = 0.01
+--mainGroup:insert(foodBtnCover)
+
+local topBar = display.newImage( "mainMenuAssets/TopBar.png" )
+topBar.x = _W*0.5
+topBar.y = 38 
 
 
 
@@ -105,6 +144,8 @@ sideBtnCover.x = _W*0.5*0.5
 sideBtnCover.y = 193
 sideBtnCover.alpha = 0
 sideScrollGroup:insert(sideBtnCover)
+
+
 
 
 end
@@ -236,6 +277,40 @@ local function sideSwipe( event )
 end
 sideBarSwipe:addEventListener("touch", sideSwipe)
 
+
+
+
+
+
+local function goFoodPlaces (event)
+if event.phase == "ended" then
+
+	transition.to(foodPlaces, { time=300, x = _W*0.5, transition=easing.inOutQuad })
+	transition.to(foodBtnCover, { time=300, x = _W*0.5, transition=easing.inOutQuad })
+	transition.to(mainGroup, { time=300, x = -_W*0.5, transition=easing.inOutQuad })
+	end
+end
+
+catagoryBtn1:addEventListener("touch", goFoodPlaces)
+
+local function goShopPlaces (event)
+if event.phase == "ended" then
+
+	transition.to(shopPlaces, { time=300, x = _W*0.5, transition=easing.inOutQuad })
+	transition.to(shopBtnCover, { time=300, x = _W*0.5, transition=easing.inOutQuad })
+	transition.to(mainGroup, { time=300, x = -_W*0.5, transition=easing.inOutQuad })
+	end
+end
+
+catagoryBtn2:addEventListener("touch", goShopPlaces)
+
+
+
+
+
+
+
+
 local function mainMenuButtonCover (event)
 if event.phase == "began" and sideBarState == "closed" then
 	local t = event.target
@@ -251,6 +326,12 @@ catagoryBtn2:addEventListener("touch", mainMenuButtonCover)
 catagoryBtn3:addEventListener("touch", mainMenuButtonCover)
 catagoryBtn4:addEventListener("touch", mainMenuButtonCover)
 catagoryBtn5:addEventListener("touch", mainMenuButtonCover)
+
+
+
+
+
+
 
 local function goToRate (event)
 	storyboard.gotoScene( "newRating" ) 
@@ -279,6 +360,17 @@ end
 sideBtn1:addEventListener("touch", sideButtonCover)
 sideBtn2:addEventListener("touch", sideButtonCover)
 sideBtn3:addEventListener("touch", sideButtonCover)
+
+
+
+local function surfRider (event)
+	if event.phase == "began" then
+	foodBtnCover.alpha = 0.2
+	elseif event.phase == "ended" then
+	foodBtnCover.alpha = 0.01
+	end
+end
+foodBtnCover:addEventListener("touch", surfRider)
 
 end
 
