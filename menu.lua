@@ -16,14 +16,42 @@ sideScrollGroup.x = -576
 -- MainMenu Assets
 
 
-local mainMenuBackground = display.newRect( _W*0.5, _H*0.5, _W, _H )
-mainMenuBackground:setFillColor( 229/255,229/255,229/255 )
+local mainMenuBackground = display.newImage( "mainMenuAssets/MainMenuBackground.jpg" )
+mainMenuBackground.y = _H*0.5
+mainMenuBackground.x = _W*0.5
 mainGroup:insert(mainMenuBackground)
 
 local topBar = display.newImage( "mainMenuAssets/TopBar.png" )
 topBar.x = _W*0.5
-topBar.y = 48 
+topBar.y = 38 
 mainGroup:insert(topBar)
+
+local catagoryBtn1 = display.newImage( "mainMenuAssets/Button.png" )
+catagoryBtn1.x = _W*0.5
+catagoryBtn1.y = 193
+mainGroup:insert(catagoryBtn1)
+
+local catagoryBtn2 = display.newImage( "mainMenuAssets/Button.png" )
+catagoryBtn2.x = _W*0.5
+catagoryBtn2.y = catagoryBtn1.y + 218
+--catagoryBtn2.alpha = 0.5
+mainGroup:insert(catagoryBtn2)
+
+local catagoryBtn3 = display.newImage( "mainMenuAssets/Button.png" )
+catagoryBtn3.x = _W*0.5
+catagoryBtn3.y = catagoryBtn2.y + 218
+mainGroup:insert(catagoryBtn3)
+
+local catagoryBtn4 = display.newImage( "mainMenuAssets/Button.png" )
+catagoryBtn4.x = _W*0.5
+catagoryBtn4.y = catagoryBtn3.y + 218
+--catagoryBtn4.alpha = 0.5
+mainGroup:insert(catagoryBtn4)
+
+local catagoryBtn5 = display.newImage( "mainMenuAssets/Button.png" )
+catagoryBtn5.x = _W*0.5
+catagoryBtn5.y = catagoryBtn4.y + 218
+mainGroup:insert(catagoryBtn5)
 
 mainMenuShade = display.newRect( _W*0.5, _H*0.5+48, _W, _H-96 )
 mainMenuShade:setFillColor( 0/255,0/255,0/255 )
@@ -93,8 +121,8 @@ local function mainSideButtonFunc(event)
 	elseif event.phase == "ended" and sideBarState == "open" then
 		sideBarState = "closed" 
 		print(sideBarState)
-		transition.to(sideBarGroup, { time=150,x = -576 , transition=easing.outQuad })
-		transition.to(sideScrollGroup, { time=150,x = -576 , transition=easing.outQuad })
+		transition.to(sideBarGroup, { time=200,x = -576 , transition=easing.outQuad })
+		transition.to(sideScrollGroup, { time=200,x = -576 , transition=easing.outQuad })
 		transition.to(mainMenuShade, { delay = 50, time=100, alpha = 0 })
 		mainMenuSideButton.alpha = 0.01
 	end
