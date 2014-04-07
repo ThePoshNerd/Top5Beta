@@ -3,6 +3,13 @@
 
 settings = {
 	
+	plugins =
+    {
+        ["CoronaProvider.ads.inneractive"] =
+        {
+            publisherId = "com.inner-active",
+        },
+    },      
 
 	orientation = {
 		default = "portrait",

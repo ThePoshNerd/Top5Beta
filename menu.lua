@@ -3,7 +3,7 @@ local scene = storyboard.newScene()
 storyboard.removeScene( "newRating" )
 storyboard.removeScene( "coupon" )
 
-
+local ads = require( "ads" )
 local widget = require( "widget" )
 --local analytics = require "analytics"
 
@@ -171,9 +171,18 @@ sideScrollGroup:insert(sideBtnCover)
 local splashScreen = display.newImage( "mainMenuAssets/SplashScreen.png" )
 splashScreen.y = _H*0.5
 splashScreen.x = _W*0.5
+--[[
+function adListener( event )
+    if ( event.isError ) then
+        --Failed to receive an ad
+		mainMenuBackground.alpha=0
+    end
+end
 
+ads.init( "inneractive", "DigitalArtAssets_TopFive_Android", adListener )
 
-
+ads.show( "banner", { x=0, y=0 } )
+-]]
 local function splashFade(event)
 if splashed == "false" then
 splashed = "true"
